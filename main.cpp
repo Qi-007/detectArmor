@@ -109,11 +109,7 @@ int main(){
     Armor all_armors;
     frame = all_armors.Armors(lights, frame);
 
-    // imshow("bimaryImage", dst);
     imshow("前哨站", frame);
-    // imshow("blurred", blurred);
-    // imshow("red_minus_blue", red_minus_blue);
-    // imshow("dst", dst);
 
     rightAspectRect.clear();    // 清空上一帧筛选的矩形
     all_contours.clear();       // 清空上一帧的轮廓

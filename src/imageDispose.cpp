@@ -37,15 +37,6 @@ Mat imageDispose:: stressRed(const Mat& m_frame){
     return m_red_minus_blue;
 }
 
-// //对彩色图像进行二值化处理
-// Mat imageDispose:: imageThreshold(const Mat& m_gary, const double& thresh){
-//     Mat m_binaryImage;
-//     // 对灰度图进行阈值化处理
-//     threshold(m_gary, m_binaryImage, thresh, 255, THRESH_BINARY);
-
-//     return m_binaryImage;
-// }
-
 //对彩色图像进行二值化处理
 Mat imageDispose:: imageThreshold(const Mat& m_gary, const double& thresh){
     Mat gary;

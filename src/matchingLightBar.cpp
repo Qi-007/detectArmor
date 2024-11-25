@@ -31,36 +31,3 @@ const float& threshold, const double& m_maxHeightDiff, const double& m_maxDistan
         }
     return matches;
 }
-
-
-//     //匹配距离最近的两个矩形
-//     float minDistance = FLT_MAX;    //确保后续计算过程中，任何质心对的距离都能够比初始值更小，从而被正确更新
-//     // pair<Point2f, Point2f> m_closestPair;
-//     for(size_t i = 0; i < m_similar_size.size(); i++){
-//         for(size_t j = i+1; j < m_similar_size.size(); j++){
-//             float distance = calaulateDistance(m_similar_size[i].center, m_similar_size[j].center);
-//             if(distance < minDistance){
-//                 minDistance = distance;
-//                 m_light = {m_similar_size[i], m_similar_size[j]};
-//             }
-        
-//         }
-//     }
-//     // if(distance > ){}
-//     return m_light;
-
-//     // for(size_t i = 0; i < m_centroids.size(); i++){
-//     //     double minDistance = 350;
-//     //     double maxDistance = 500;
-//     //        for(size_t j = i+1; j < m_centroids.size(); j++){
-//     //         float distance = calaulateDistance(m_centroids[i], m_centroids[j]);
-//     //         if(distance > minDistance && distance < maxDistance){    
-//     //             m_lights.push_back(m_similar_size[i]);
-//     //             m_lights.push_back(m_similar_size[j]);
-//     //         }
-//     //     }
-//     // }
-    
-//     // return m_lights;
-// }
-
