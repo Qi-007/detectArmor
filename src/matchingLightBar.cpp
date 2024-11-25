@@ -11,15 +11,17 @@ bool isAngleSimilar(float angle1, float angle2, float threshold) {
     return fabs(angle1 - angle2) <= threshold;
 }
 
-//根据矩形的倾斜角度两两匹配灯条
+//两两匹配灯条
 vector<pair<RotatedRect, RotatedRect>> matchingLightBar:: matchRotatedRects(const vector<RotatedRect>& rects,
 const float& threshold, const double& m_maxHeightDiff, const double& m_maxDistance){
     vector<pair<RotatedRect, RotatedRect>> matches;
         // 双重循环检查每对矩形
         for (size_t i = 0; i < rects.size(); ++i) {
             for (size_t j = i + 1; j < rects.size(); ++j) {
-                // 如果两个矩形的角度相似，则认为是匹配的
-            if (isAngleSimilar(rects[i].angle, rects[j].angle, threshold) &&
+                //如果两个矩形的角度相似，则认为是匹配的
+                //两灯条的中心高度相差不大
+                //两灯条的中心之间的距离相差不大
+            if (
                 abs(rects[i].center.y - rects[j].center.y) < m_maxHeightDiff &&
                 calculateDistance1(rects[i].center, rects[j].center) < m_maxDistance) {
                     matches.emplace_back(rects[i], rects[j]);

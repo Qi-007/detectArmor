@@ -27,7 +27,7 @@ find_package(OpenCV REQUIRED)
 include_directories(${OpenCV_INCLUDE_DIRS} ${CMAKE_SOURCE_DIR}/include)
 
 #添加可执行文件
-set(SRC_DIR "/home/zjq/code/DetectArmor/src")
+set(SRC_DIR "/home/zjq/code/detectArmor/src")
 
 file(GLOB SRC_FILES "${SRC_DIR}/*cpp")
 

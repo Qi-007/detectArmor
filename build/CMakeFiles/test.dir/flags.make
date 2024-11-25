@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/zjq/code/DetectArmor/include -isystem /usr/local/include/opencv4
+CXX_INCLUDES = -I/home/zjq/code/detectArmor/include -isystem /usr/local/include/opencv4
 
 CXX_FLAGS = 
 

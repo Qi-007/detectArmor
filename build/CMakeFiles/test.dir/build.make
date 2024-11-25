@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/zjq/code/DetectArmor
+CMAKE_SOURCE_DIR = /home/zjq/code/detectArmor
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/zjq/code/DetectArmor/build
+CMAKE_BINARY_DIR = /home/zjq/code/detectArmor/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/test.dir/depend.make
@@ -70,74 +70,74 @@ include CMakeFiles/test.dir/progress.make
 include CMakeFiles/test.dir/flags.make
 
 CMakeFiles/test.dir/src/Armor.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/src/Armor.cpp.o: /home/zjq/code/DetectArmor/src/Armor.cpp
+CMakeFiles/test.dir/src/Armor.cpp.o: /home/zjq/code/detectArmor/src/Armor.cpp
 CMakeFiles/test.dir/src/Armor.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zjq/code/DetectArmor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test.dir/src/Armor.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/Armor.cpp.o -MF CMakeFiles/test.dir/src/Armor.cpp.o.d -o CMakeFiles/test.dir/src/Armor.cpp.o -c /home/zjq/code/DetectArmor/src/Armor.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zjq/code/detectArmor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/test.dir/src/Armor.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/Armor.cpp.o -MF CMakeFiles/test.dir/src/Armor.cpp.o.d -o CMakeFiles/test.dir/src/Armor.cpp.o -c /home/zjq/code/detectArmor/src/Armor.cpp
 
 CMakeFiles/test.dir/src/Armor.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test.dir/src/Armor.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zjq/code/DetectArmor/src/Armor.cpp > CMakeFiles/test.dir/src/Armor.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zjq/code/detectArmor/src/Armor.cpp > CMakeFiles/test.dir/src/Armor.cpp.i
 
 CMakeFiles/test.dir/src/Armor.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/Armor.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zjq/code/DetectArmor/src/Armor.cpp -o CMakeFiles/test.dir/src/Armor.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zjq/code/detectArmor/src/Armor.cpp -o CMakeFiles/test.dir/src/Armor.cpp.s
 
 CMakeFiles/test.dir/src/findLightBar.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/src/findLightBar.cpp.o: /home/zjq/code/DetectArmor/src/findLightBar.cpp
+CMakeFiles/test.dir/src/findLightBar.cpp.o: /home/zjq/code/detectArmor/src/findLightBar.cpp
 CMakeFiles/test.dir/src/findLightBar.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zjq/code/DetectArmor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test.dir/src/findLightBar.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/findLightBar.cpp.o -MF CMakeFiles/test.dir/src/findLightBar.cpp.o.d -o CMakeFiles/test.dir/src/findLightBar.cpp.o -c /home/zjq/code/DetectArmor/src/findLightBar.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zjq/code/detectArmor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/test.dir/src/findLightBar.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/findLightBar.cpp.o -MF CMakeFiles/test.dir/src/findLightBar.cpp.o.d -o CMakeFiles/test.dir/src/findLightBar.cpp.o -c /home/zjq/code/detectArmor/src/findLightBar.cpp
 
 CMakeFiles/test.dir/src/findLightBar.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test.dir/src/findLightBar.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zjq/code/DetectArmor/src/findLightBar.cpp > CMakeFiles/test.dir/src/findLightBar.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zjq/code/detectArmor/src/findLightBar.cpp > CMakeFiles/test.dir/src/findLightBar.cpp.i
 
 CMakeFiles/test.dir/src/findLightBar.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/findLightBar.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zjq/code/DetectArmor/src/findLightBar.cpp -o CMakeFiles/test.dir/src/findLightBar.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zjq/code/detectArmor/src/findLightBar.cpp -o CMakeFiles/test.dir/src/findLightBar.cpp.s
 
 CMakeFiles/test.dir/src/imageDispose.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/src/imageDispose.cpp.o: /home/zjq/code/DetectArmor/src/imageDispose.cpp
+CMakeFiles/test.dir/src/imageDispose.cpp.o: /home/zjq/code/detectArmor/src/imageDispose.cpp
 CMakeFiles/test.dir/src/imageDispose.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zjq/code/DetectArmor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test.dir/src/imageDispose.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/imageDispose.cpp.o -MF CMakeFiles/test.dir/src/imageDispose.cpp.o.d -o CMakeFiles/test.dir/src/imageDispose.cpp.o -c /home/zjq/code/DetectArmor/src/imageDispose.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zjq/code/detectArmor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/test.dir/src/imageDispose.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/imageDispose.cpp.o -MF CMakeFiles/test.dir/src/imageDispose.cpp.o.d -o CMakeFiles/test.dir/src/imageDispose.cpp.o -c /home/zjq/code/detectArmor/src/imageDispose.cpp
 
 CMakeFiles/test.dir/src/imageDispose.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test.dir/src/imageDispose.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zjq/code/DetectArmor/src/imageDispose.cpp > CMakeFiles/test.dir/src/imageDispose.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zjq/code/detectArmor/src/imageDispose.cpp > CMakeFiles/test.dir/src/imageDispose.cpp.i
 
 CMakeFiles/test.dir/src/imageDispose.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/imageDispose.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zjq/code/DetectArmor/src/imageDispose.cpp -o CMakeFiles/test.dir/src/imageDispose.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zjq/code/detectArmor/src/imageDispose.cpp -o CMakeFiles/test.dir/src/imageDispose.cpp.s
 
 CMakeFiles/test.dir/src/matchingLightBar.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/src/matchingLightBar.cpp.o: /home/zjq/code/DetectArmor/src/matchingLightBar.cpp
+CMakeFiles/test.dir/src/matchingLightBar.cpp.o: /home/zjq/code/detectArmor/src/matchingLightBar.cpp
 CMakeFiles/test.dir/src/matchingLightBar.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zjq/code/DetectArmor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/test.dir/src/matchingLightBar.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/matchingLightBar.cpp.o -MF CMakeFiles/test.dir/src/matchingLightBar.cpp.o.d -o CMakeFiles/test.dir/src/matchingLightBar.cpp.o -c /home/zjq/code/DetectArmor/src/matchingLightBar.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zjq/code/detectArmor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/test.dir/src/matchingLightBar.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/src/matchingLightBar.cpp.o -MF CMakeFiles/test.dir/src/matchingLightBar.cpp.o.d -o CMakeFiles/test.dir/src/matchingLightBar.cpp.o -c /home/zjq/code/detectArmor/src/matchingLightBar.cpp
 
 CMakeFiles/test.dir/src/matchingLightBar.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test.dir/src/matchingLightBar.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zjq/code/DetectArmor/src/matchingLightBar.cpp > CMakeFiles/test.dir/src/matchingLightBar.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zjq/code/detectArmor/src/matchingLightBar.cpp > CMakeFiles/test.dir/src/matchingLightBar.cpp.i
 
 CMakeFiles/test.dir/src/matchingLightBar.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test.dir/src/matchingLightBar.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zjq/code/DetectArmor/src/matchingLightBar.cpp -o CMakeFiles/test.dir/src/matchingLightBar.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zjq/code/detectArmor/src/matchingLightBar.cpp -o CMakeFiles/test.dir/src/matchingLightBar.cpp.s
 
 CMakeFiles/test.dir/main.cpp.o: CMakeFiles/test.dir/flags.make
-CMakeFiles/test.dir/main.cpp.o: /home/zjq/code/DetectArmor/main.cpp
+CMakeFiles/test.dir/main.cpp.o: /home/zjq/code/detectArmor/main.cpp
 CMakeFiles/test.dir/main.cpp.o: CMakeFiles/test.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zjq/code/DetectArmor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/test.dir/main.cpp.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/main.cpp.o -MF CMakeFiles/test.dir/main.cpp.o.d -o CMakeFiles/test.dir/main.cpp.o -c /home/zjq/code/DetectArmor/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/zjq/code/detectArmor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/test.dir/main.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/test.dir/main.cpp.o -MF CMakeFiles/test.dir/main.cpp.o.d -o CMakeFiles/test.dir/main.cpp.o -c /home/zjq/code/detectArmor/main.cpp
 
 CMakeFiles/test.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/test.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zjq/code/DetectArmor/main.cpp > CMakeFiles/test.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/zjq/code/detectArmor/main.cpp > CMakeFiles/test.dir/main.cpp.i
 
 CMakeFiles/test.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/test.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zjq/code/DetectArmor/main.cpp -o CMakeFiles/test.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/zjq/code/detectArmor/main.cpp -o CMakeFiles/test.dir/main.cpp.s
 
 # Object files for target test
 test_OBJECTS = \
@@ -172,7 +172,7 @@ test: /usr/local/lib/libopencv_flann.so.4.10.0
 test: /usr/local/lib/libopencv_imgproc.so.4.10.0
 test: /usr/local/lib/libopencv_core.so.4.10.0
 test: CMakeFiles/test.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/zjq/code/DetectArmor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable test"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/zjq/code/detectArmor/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable test"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/test.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -184,6 +184,6 @@ CMakeFiles/test.dir/clean:
 .PHONY : CMakeFiles/test.dir/clean
 
 CMakeFiles/test.dir/depend:
-	cd /home/zjq/code/DetectArmor/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zjq/code/DetectArmor /home/zjq/code/DetectArmor /home/zjq/code/DetectArmor/build /home/zjq/code/DetectArmor/build /home/zjq/code/DetectArmor/build/CMakeFiles/test.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/zjq/code/detectArmor/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/zjq/code/detectArmor /home/zjq/code/detectArmor /home/zjq/code/detectArmor/build /home/zjq/code/detectArmor/build /home/zjq/code/detectArmor/build/CMakeFiles/test.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/test.dir/depend
 

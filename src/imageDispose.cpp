@@ -37,11 +37,22 @@ Mat imageDispose:: stressRed(const Mat& m_frame){
     return m_red_minus_blue;
 }
 
+// //对彩色图像进行二值化处理
+// Mat imageDispose:: imageThreshold(const Mat& m_gary, const double& thresh){
+//     Mat m_binaryImage;
+//     // 对灰度图进行阈值化处理
+//     threshold(m_gary, m_binaryImage, thresh, 255, THRESH_BINARY);
+
+//     return m_binaryImage;
+// }
+
 //对彩色图像进行二值化处理
 Mat imageDispose:: imageThreshold(const Mat& m_gary, const double& thresh){
+    Mat gary;
+    cvtColor(m_gary, gary, COLOR_BGR2GRAY);
     Mat m_binaryImage;
     // 对灰度图进行阈值化处理
-    cv::threshold(m_gary, m_binaryImage, thresh, 255, THRESH_BINARY);
+    threshold(gary, m_binaryImage, thresh, 255, THRESH_BINARY);
 
     return m_binaryImage;
 }
@@ -49,13 +60,11 @@ Mat imageDispose:: imageThreshold(const Mat& m_gary, const double& thresh){
 //对二值化图像进行膨胀处理
 Mat imageDispose:: imageDilate(const Mat& m_binaryImage){
     // 创建结构元素（7*7矩形核）
-    Mat m_kernel = getStructuringElement(MORPH_RECT, Size(10, 10));
+    Mat m_kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
 
     // 存储膨胀结果
     Mat m_dst;
-    for(int i = 0; i < 10; i++){
-        dilate(m_binaryImage, m_dst, m_kernel);
-    }
+    dilate(m_binaryImage, m_dst, m_kernel);
 
     return m_dst;
 }

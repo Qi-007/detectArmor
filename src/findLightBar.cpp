@@ -2,7 +2,8 @@
 
 //宽高比
 //按轮廓的宽高比筛选轮廓
-vector<RotatedRect> findLightBar:: ScreenAspect(const vector<vector<Point>>& m_contours, const float& minRatio, const float& maxRatio, vector<RotatedRect>& m_rightAspectRect){
+vector<RotatedRect> findLightBar:: ScreenAspect(const vector<vector<Point>>& m_contours, const float& minRatio, 
+const float& maxRatio, const float& minArea, vector<RotatedRect>& m_rightAspectRect){
     // //绘制轮廓
     // vector<vector<Point>> m_contours;
     // findContours(m_binaryImage, m_contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
@@ -11,7 +12,8 @@ vector<RotatedRect> findLightBar:: ScreenAspect(const vector<vector<Point>>& m_c
         RotatedRect roi = minAreaRect(m_contours[i]);
         //计算长宽比
         float aspectRatio = static_cast<float> (roi.size.width) / (roi.size.height);
-        if(aspectRatio > minRatio && aspectRatio < maxRatio){
+        if(aspectRatio > minRatio && aspectRatio < maxRatio && roi.size.area() > minArea){
+            // cout << roi.size.area() << endl;
             m_rightAspectRect.push_back(roi);
         }
     }

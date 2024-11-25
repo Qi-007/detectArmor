@@ -8,11 +8,11 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/zjq/code/DetectArmor/main.cpp" "CMakeFiles/test.dir/main.cpp.o" "gcc" "CMakeFiles/test.dir/main.cpp.o.d"
-  "/home/zjq/code/DetectArmor/src/Armor.cpp" "CMakeFiles/test.dir/src/Armor.cpp.o" "gcc" "CMakeFiles/test.dir/src/Armor.cpp.o.d"
-  "/home/zjq/code/DetectArmor/src/findLightBar.cpp" "CMakeFiles/test.dir/src/findLightBar.cpp.o" "gcc" "CMakeFiles/test.dir/src/findLightBar.cpp.o.d"
-  "/home/zjq/code/DetectArmor/src/imageDispose.cpp" "CMakeFiles/test.dir/src/imageDispose.cpp.o" "gcc" "CMakeFiles/test.dir/src/imageDispose.cpp.o.d"
-  "/home/zjq/code/DetectArmor/src/matchingLightBar.cpp" "CMakeFiles/test.dir/src/matchingLightBar.cpp.o" "gcc" "CMakeFiles/test.dir/src/matchingLightBar.cpp.o.d"
+  "/home/zjq/code/detectArmor/main.cpp" "CMakeFiles/test.dir/main.cpp.o" "gcc" "CMakeFiles/test.dir/main.cpp.o.d"
+  "/home/zjq/code/detectArmor/src/Armor.cpp" "CMakeFiles/test.dir/src/Armor.cpp.o" "gcc" "CMakeFiles/test.dir/src/Armor.cpp.o.d"
+  "/home/zjq/code/detectArmor/src/findLightBar.cpp" "CMakeFiles/test.dir/src/findLightBar.cpp.o" "gcc" "CMakeFiles/test.dir/src/findLightBar.cpp.o.d"
+  "/home/zjq/code/detectArmor/src/imageDispose.cpp" "CMakeFiles/test.dir/src/imageDispose.cpp.o" "gcc" "CMakeFiles/test.dir/src/imageDispose.cpp.o.d"
+  "/home/zjq/code/detectArmor/src/matchingLightBar.cpp" "CMakeFiles/test.dir/src/matchingLightBar.cpp.o" "gcc" "CMakeFiles/test.dir/src/matchingLightBar.cpp.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

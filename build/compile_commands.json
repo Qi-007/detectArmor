@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/zjq/code/detectArmor/build",
+  "command": "/usr/bin/g++ -I/home/zjq/code/detectArmor/include -isystem /usr/local/include/opencv4 -g -o CMakeFiles/test.dir/src/Armor.cpp.o -c /home/zjq/code/detectArmor/src/Armor.cpp",
+  "file": "/home/zjq/code/detectArmor/src/Armor.cpp",
+  "output": "CMakeFiles/test.dir/src/Armor.cpp.o"
+},
+{
+  "directory": "/home/zjq/code/detectArmor/build",
+  "command": "/usr/bin/g++ -I/home/zjq/code/detectArmor/include -isystem /usr/local/include/opencv4 -g -o CMakeFiles/test.dir/src/findLightBar.cpp.o -c /home/zjq/code/detectArmor/src/findLightBar.cpp",
+  "file": "/home/zjq/code/detectArmor/src/findLightBar.cpp",
+  "output": "CMakeFiles/test.dir/src/findLightBar.cpp.o"
+},
+{
+  "directory": "/home/zjq/code/detectArmor/build",
+  "command": "/usr/bin/g++ -I/home/zjq/code/detectArmor/include -isystem /usr/local/include/opencv4 -g -o CMakeFiles/test.dir/src/imageDispose.cpp.o -c /home/zjq/code/detectArmor/src/imageDispose.cpp",
+  "file": "/home/zjq/code/detectArmor/src/imageDispose.cpp",
+  "output": "CMakeFiles/test.dir/src/imageDispose.cpp.o"
+},
+{
+  "directory": "/home/zjq/code/detectArmor/build",
+  "command": "/usr/bin/g++ -I/home/zjq/code/detectArmor/include -isystem /usr/local/include/opencv4 -g -o CMakeFiles/test.dir/src/matchingLightBar.cpp.o -c /home/zjq/code/detectArmor/src/matchingLightBar.cpp",
+  "file": "/home/zjq/code/detectArmor/src/matchingLightBar.cpp",
+  "output": "CMakeFiles/test.dir/src/matchingLightBar.cpp.o"
+},
+{
+  "directory": "/home/zjq/code/detectArmor/build",
+  "command": "/usr/bin/g++ -I/home/zjq/code/detectArmor/include -isystem /usr/local/include/opencv4 -g -o CMakeFiles/test.dir/main.cpp.o -c /home/zjq/code/detectArmor/main.cpp",
+  "file": "/home/zjq/code/detectArmor/main.cpp",
+  "output": "CMakeFiles/test.dir/main.cpp.o"
+}
+]

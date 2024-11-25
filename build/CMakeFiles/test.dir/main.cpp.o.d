@@ -1,4 +1,4 @@
-CMakeFiles/test.dir/main.cpp.o: /home/zjq/code/DetectArmor/main.cpp \
+CMakeFiles/test.dir/main.cpp.o: /home/zjq/code/detectArmor/main.cpp \
  /usr/include/stdc-predef.h /usr/include/c++/13/iostream \
  /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
@@ -365,4 +365,4 @@ CMakeFiles/test.dir/main.cpp.o: /home/zjq/code/DetectArmor/main.cpp \
  /usr/local/include/opencv4/opencv2/video.hpp \
  /usr/local/include/opencv4/opencv2/video/tracking.hpp \
  /usr/local/include/opencv4/opencv2/video/background_segm.hpp \
- /home/zjq/code/DetectArmor/include/detect.h
+ /home/zjq/code/detectArmor/include/detect.h

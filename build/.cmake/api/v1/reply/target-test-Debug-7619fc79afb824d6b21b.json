@@ -46,11 +46,17 @@
 	"compileGroups" : 
 	[
 		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-g"
+				}
+			],
 			"includes" : 
 			[
 				{
 					"backtrace" : 3,
-					"path" : "/home/zjq/code/DetectArmor/include"
+					"path" : "/home/zjq/code/detectArmor/include"
 				},
 				{
 					"backtrace" : 3,
@@ -74,6 +80,10 @@
 	{
 		"commandFragments" : 
 		[
+			{
+				"fragment" : "-g",
+				"role" : "flags"
+			},
 			{
 				"fragment" : "",
 				"role" : "flags"

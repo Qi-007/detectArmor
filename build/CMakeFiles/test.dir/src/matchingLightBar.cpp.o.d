@@ -1,6 +1,6 @@
 CMakeFiles/test.dir/src/matchingLightBar.cpp.o: \
- /home/zjq/code/DetectArmor/src/matchingLightBar.cpp \
- /usr/include/stdc-predef.h /home/zjq/code/DetectArmor/include/detect.h \
+ /home/zjq/code/detectArmor/src/matchingLightBar.cpp \
+ /usr/include/stdc-predef.h /home/zjq/code/detectArmor/include/detect.h \
  /usr/include/c++/13/iostream /usr/include/c++/13/bits/requires_hosted.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/13/bits/os_defines.h \

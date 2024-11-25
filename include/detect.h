@@ -13,11 +13,12 @@ using namespace cv;
 //存储数据
 struct Information{
 public:  
-    double thresh = 180.0;  //亮度阈值
+    double thresh = 120.0;  //亮度阈值
+    float minArea = 200.0f;   //最小面积
     double minRatio = 0.001;   //最小宽高比  
     double maxRatio = 10.0;   //最大宽高比
     double light_armor_ratio = 2.55;   //装甲板宽与灯条高之比
-    float threshold = 5.0f;    //筛选平行角度的阈值
+    float angle_threshold = 5.0f;    //筛选平行角度的阈值
     double maxHeightDiff = 10.0;    //两灯条质心的最大高度差
     double maxDistance = 150.0;    //两灯条之间的最大距离
 };
@@ -36,7 +37,7 @@ public:
 class findLightBar {
 public:
     //按宽高比筛选轮廓
-    vector<RotatedRect> ScreenAspect(const vector<vector<Point>>& m_contours, const float& minRatio, const float& maxRatio, vector<RotatedRect>& m_rightAspectRect);
+    vector<RotatedRect> ScreenAspect(const vector<vector<Point>>& m_contours, const float& minRatio, const float& maxRatio, const float& minArea, vector<RotatedRect>& m_rightAspectRect);
 };
 
 //匹配灯条

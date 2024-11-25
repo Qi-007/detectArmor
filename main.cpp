@@ -28,30 +28,26 @@ int main(){
     //读取阈值
     Information all_information;
 
-    double thresh = all_information.thresh;
-    double minRatio = all_information.minRatio; 
-    double maxRatio = all_information.maxRatio;
-    double light_armor_ratio = all_information.light_armor_ratio;
-    float threshold = all_information.threshold;
-    double maxHeightDiff = all_information.maxHeightDiff;
-    double maxDistance = all_information.maxDistance;
+    double thresh = all_information.thresh;    //亮度阈值
+    float minArea = all_information.minArea;    //灯条的最小面积
+    double minRatio = all_information.minRatio;     //灯条的最小宽高比
+    double maxRatio = all_information.maxRatio;     //灯条的最大宽高比
+    // double light_armor_ratio = all_information.light_armor_ratio;   //灯条长与装甲板宽的比值
+    float angle_threshold = all_information.angle_threshold;    //筛选平行角度的阈值
+    double maxHeightDiff = all_information.maxHeightDiff;   //两灯条质心的最大高度差
+    double maxDistance = all_information.maxDistance;   //两灯条之间的最大距离
 
     Mat frame,  //原图像
-        blurred,
+        blurred,    //高斯函数去噪
         red_minus_blue,   //红蓝通道相减后的图像，强调红色
         blue_minus_red,   //蓝红通道相减后的图像，强调蓝色
         binaryImage,      //二值化后的图像
         dst;     //膨胀后的图像
 
     vector<vector<Point>> all_contours;     //未经筛选的轮廓
-    vector<vector<Point>> rightAreaContours;    // 筛选过面积的轮廓
     vector<RotatedRect> rightAspectRect;       //筛选过宽高比的矩形
-    // vector<RotatedRect> filteredRectangles;    // 筛选过倾斜角的矩形
-    vector<pair<RotatedRect, RotatedRect>> lights;    //根据倾斜角筛选
-    pair<RotatedRect, RotatedRect> light;    //匹配过后的灯条 
+    vector<pair<RotatedRect, RotatedRect>> lights;    //根据倾斜角等筛选出的配对灯条
 
-    namedWindow("前哨站", WINDOW_AUTOSIZE);
-    // namedWindow("binaryImage", WINDOW_AUTOSIZE);
 
     while(true){
     //读取每一帧
@@ -66,13 +62,13 @@ int main(){
     //使用高斯函数平滑图像，减少噪声
     blurred = frame_dispose.imageGaussion(frame);
 
-    //红蓝通道相减，强调蓝色区域
-    red_minus_blue = frame_dispose.stressRed(blurred);
-    // //蓝红通道相减，强调红色区域
-    // blue_minus_red = frame_dispose.stressBlue(blurred);
+    // //红蓝通道相减，强调蓝色区域
+    // red_minus_blue = frame_dispose.stressRed(blurred);
+    // // //蓝红通道相减，强调红色区域
+    // // blue_minus_red = frame_dispose.stressBlue(blurred);
 
     //对彩色图像进行二值化处理
-    binaryImage = frame_dispose.imageThreshold(red_minus_blue, thresh);
+    binaryImage = frame_dispose.imageThreshold(blurred, thresh);
 
     //对二值化图像进行膨胀
     dst = frame_dispose.imageDilate(binaryImage);    
@@ -81,15 +77,25 @@ int main(){
     findLightBar all_lightBar;
     findContours(dst, all_contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 
+    // // 尝试绘制识别出的所有灯条
+    // for(size_t i = 0; i < all_contours.size(); i++){
+    //     drawContours(frame, all_contours, i, Scalar(255, 255, 255), 2);
+    // }
+
     //筛选灯条
     //按轮廓的宽高比筛选轮廓
-    rightAspectRect = all_lightBar.ScreenAspect(all_contours, minRatio, maxRatio, rightAspectRect);
-    
+    rightAspectRect = all_lightBar.ScreenAspect(all_contours, minRatio, maxRatio, minArea, rightAspectRect);
+
+    // // 尝试绘制筛选过宽高比的灯条
+    // for(size_t i = 0; i < rightAspectRect.size(); i++){
+    //     drawRotatedRect(frame, rightAspectRect[i], Scalar(255, 255, 255), 2);
+    // }
+
     //匹配灯条
     matchingLightBar right_lightBar;
 
     //根据矩形的倾斜角度两两匹配灯条
-    lights = right_lightBar.matchRotatedRects(rightAspectRect, threshold, maxHeightDiff, maxDistance);
+    lights = right_lightBar.matchRotatedRects(rightAspectRect, angle_threshold, maxHeightDiff, maxDistance);
 
     // // 遍历vector并输出每对RotatedRect
     // for (const auto& RotatedRect : lights){
@@ -103,7 +109,11 @@ int main(){
     Armor all_armors;
     frame = all_armors.Armors(lights, frame);
 
+    // imshow("bimaryImage", dst);
     imshow("前哨站", frame);
+    // imshow("blurred", blurred);
+    // imshow("red_minus_blue", red_minus_blue);
+    // imshow("dst", dst);
 
     rightAspectRect.clear();    // 清空上一帧筛选的矩形
     all_contours.clear();       // 清空上一帧的轮廓
