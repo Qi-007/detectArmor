@@ -9,6 +9,23 @@
 using namespace std;
 using namespace cv;
 
+// 创建灯条类
+class LightDescriptor{
+public:
+    float width, length, angle, area;    // 宽度，长度，角度，面积
+    Point2f center, point[4];    //灯条的质心，4个顶点
+public:
+    LightDescriptor() {};    //简单声明灯条
+    LightDescriptor(const RotatedRect& light){
+        width = light.size.width;
+        length = light.size.height;
+        angle = light.angle;
+        area = light.size.area();
+        center = light.center;
+        light.points(point);
+    }
+};
+
 //struct默认公有
 //存储数据
 struct Information{
@@ -36,8 +53,10 @@ public:
 //检测灯条
 class findLightBar {
 public:
-    //按宽高比筛选轮廓
-    vector<RotatedRect> ScreenAspect(const vector<vector<Point>>& m_contours, const float& minRatio, const float& maxRatio, const float& minArea, vector<RotatedRect>& m_rightAspectRect);
+    // //按宽高比筛选轮廓
+    // vector<RotatedRect> ScreenAspect(const vector<vector<Point>>& m_contours, const float& minRatio, const float& maxRatio, const float& minArea, vector<RotatedRect>& m_rightAspectRect);
+
+    vector<LightDescriptor> Lights(const vector<vector<Point>>& contours, const float& minRatio, const float& maxRatio, const float& minArea);
 };
 
 //匹配灯条

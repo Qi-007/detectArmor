@@ -5,6 +5,14 @@
 
 using namespace std;
 using namespace cv;
+//绘制最小外接矩形(灯条类)
+void drawLight(Mat& image, const LightDescriptor& light, const Scalar& color, int thickness) {
+    // 将四个顶点连线绘制出旋转矩形
+    for (int i = 0; i < 4; ++i) {
+        line(image, light.point[i], light.point[(i + 1) % 4], color, thickness);
+    }
+    return;
+}
 
 //绘制最小外接矩形
 void drawRotatedRect(Mat& image, const RotatedRect& rotatedRect, const Scalar& color, int thickness) {
@@ -16,6 +24,7 @@ void drawRotatedRect(Mat& image, const RotatedRect& rotatedRect, const Scalar& c
     for (int i = 0; i < 4; ++i) {
         line(image, vertices[i], vertices[(i + 1) % 4], color, thickness);
     }
+    return;
 }
 
 int main(){
@@ -45,8 +54,8 @@ int main(){
         dst;     //膨胀后的图像
 
     vector<vector<Point>> all_contours;     //未经筛选的轮廓
-    vector<RotatedRect> rightAspectRect;       //筛选过宽高比的矩形
-    vector<pair<RotatedRect, RotatedRect>> lights;    //根据倾斜角等筛选出的配对灯条
+    vector<LightDescriptor> lights;       //筛选过宽高比的矩形
+    vector<pair<RotatedRect, RotatedRect>> matching_lights;    //根据倾斜角等筛选出的配对灯条
 
 
     while(true){
@@ -56,40 +65,34 @@ int main(){
         break;
     }
 
-    //图像的阈处理
+    // 图像的预处理
     imageDispose frame_dispose;
 
-    //使用高斯函数平滑图像，减少噪声
+    // 使用高斯函数平滑图像，减少噪声
     blurred = frame_dispose.imageGaussion(frame);
 
-    // //红蓝通道相减，强调蓝色区域
+    // // 红蓝通道相减，强调蓝色区域
     // red_minus_blue = frame_dispose.stressRed(blurred);
-    // // //蓝红通道相减，强调红色区域
+    // // // 蓝红通道相减，强调红色区域
     // // blue_minus_red = frame_dispose.stressBlue(blurred);
 
-    //对彩色图像进行二值化处理
+    // 对彩色图像进行二值化处理
     binaryImage = frame_dispose.imageThreshold(blurred, thresh);
 
-    //对二值化图像进行膨胀
+    // 对二值化图像进行膨胀
     dst = frame_dispose.imageDilate(binaryImage);    
+
+    // 寻找轮廓
+    findContours(dst, all_contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
 
     //识别灯条
     findLightBar all_lightBar;
-    findContours(dst, all_contours, RETR_EXTERNAL, CHAIN_APPROX_SIMPLE);
-
-    // // 尝试绘制识别出的所有灯条
-    // for(size_t i = 0; i < all_contours.size(); i++){
-    //     drawContours(frame, all_contours, i, Scalar(255, 255, 255), 2);
-    // }
-
-    //筛选灯条
-    //按轮廓的宽高比筛选轮廓
-    rightAspectRect = all_lightBar.ScreenAspect(all_contours, minRatio, maxRatio, minArea, rightAspectRect);
-
-    // // 尝试绘制筛选过宽高比的灯条
-    // for(size_t i = 0; i < rightAspectRect.size(); i++){
-    //     drawRotatedRect(frame, rightAspectRect[i], Scalar(255, 255, 255), 2);
-    // }
+    lights = all_lightBar.Lights(all_contours, minRatio, maxRatio, minArea);
+    
+    // 尝试绘制识别出的所有灯条
+    for(size_t i = 0; i < lights.size(); i++){
+        drawLight(frame, lights[i], Scalar(255, 255, 255), 2);
+    }
 
     //匹配灯条
     matchingLightBar right_lightBar;
@@ -97,21 +100,21 @@ int main(){
     //根据矩形的倾斜角度两两匹配灯条
     lights = right_lightBar.matchRotatedRects(rightAspectRect, angle_threshold, maxHeightDiff, maxDistance);
 
-    // // 遍历vector并输出每对RotatedRect
-    // for (const auto& RotatedRect : lights){
-    //     const auto& rect1 = RotatedRect.first;
-    //     const auto& rect2 = RotatedRect.second;
-    //     drawRotatedRect(frame, rect1, Scalar(255, 255, 255), 2);
-    //     drawRotatedRect(frame, rect2, Scalar(255, 255, 255), 2);
-    // }
+    // // // 遍历vector并输出每对RotatedRect
+    // // for (const auto& RotatedRect : lights){
+    // //     const auto& rect1 = RotatedRect.first;
+    // //     const auto& rect2 = RotatedRect.second;
+    // //     drawRotatedRect(frame, rect1, Scalar(255, 255, 255), 2);
+    // //     drawRotatedRect(frame, rect2, Scalar(255, 255, 255), 2);
+    // // }
 
-    //识别装甲板
-    Armor all_armors;
-    frame = all_armors.Armors(lights, frame);
+    // //识别装甲板
+    // Armor all_armors;
+    // frame = all_armors.Armors(lights, frame);
 
     imshow("前哨站", frame);
 
-    rightAspectRect.clear();    // 清空上一帧筛选的矩形
+    lights.clear();    // 清空上一帧筛选的矩形
     all_contours.clear();       // 清空上一帧的轮廓
 
     waitKey(1000/cap.get(CAP_PROP_FPS));

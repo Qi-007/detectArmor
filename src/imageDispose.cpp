@@ -6,7 +6,8 @@ Mat imageDispose:: imageGaussion(const Mat& m_frame){
     GaussianBlur(m_frame, m_blurred, Size(5, 5), 10, 20);
     return m_blurred;
 }
-   
+
+// 通道相减，强调蓝色
 Mat imageDispose:: stressBlue(const Mat& m_frame){
     //分离通道
     vector<Mat> channels(3);
@@ -22,6 +23,7 @@ Mat imageDispose:: stressBlue(const Mat& m_frame){
     return m_blue_minus_red;
 }
 
+// 通道相减，强调红色
 Mat imageDispose:: stressRed(const Mat& m_frame){
     //分离通道
     vector<Mat> channels(3);
