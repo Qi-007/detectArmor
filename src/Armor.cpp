@@ -22,7 +22,7 @@ Point2f getCentroid(const Rect& rect){
     return Point2f(rect.x + rect.width / 2.0, rect.y + rect.height / 2.0);
 }
 
-Mat Armor:: Armors(const vector<pair<RotatedRect, RotatedRect>>& m_lights, Mat& m_frame){
+Mat Armor:: Armors(const vector<pair<LightDescriptor, LightDescriptor>>& m_lights, Mat& m_frame){
     // 如果没有灯条，则直接返回原始图像
     if (m_lights.empty()) {
         return m_frame;
@@ -30,11 +30,11 @@ Mat Armor:: Armors(const vector<pair<RotatedRect, RotatedRect>>& m_lights, Mat& 
 
     //绘制装甲板区域
     for(const auto& m_light : m_lights){
-        const auto& rect1 = m_light.first;
-        const auto& rect2 = m_light.second;
+        const auto& leftLight = m_light.first;
+        const auto& rightLight = m_light.second;
 
         // 将点存入容器
-        vector<Point> points = {rect1.center, rect2.center};
+        vector<Point> points = {leftLight.center, rightLight.center};
 
         // 按 x 值从小到大排序
         sort(points.begin(), points.end(), [](const Point& a, const Point& b) {
@@ -46,13 +46,13 @@ Mat Armor:: Armors(const vector<pair<RotatedRect, RotatedRect>>& m_lights, Mat& 
 
         Point2f m_center; // 矩形中心点
         Size2f m_size;      // 矩形宽高
-        float m_angle = (rect1.angle + rect2.angle) / 2; ;   // 旋转角度（顺时针）
+        float m_angle = (leftLight.angle + rightLight.angle) / 2; ;   // 旋转角度（顺时针）
 
         //寻找两个灯条质心并寻找中点
         m_center.x = (left_light.x + right_light.x) / 2;
         m_center.y = (left_light.y + right_light.y) / 2;
 
-        m_size.height = rect1.size.height + rect2.size.height;
+        m_size.height = leftLight.length + rightLight.length;
         m_size.width = calculateDistance2(left_light, right_light);
 
         if (m_size.width > m_size.height) {
@@ -63,9 +63,13 @@ Mat Armor:: Armors(const vector<pair<RotatedRect, RotatedRect>>& m_lights, Mat& 
         // 提取两个旋转矩形的顶点
         // 顶点的顺序是按矩形的边排列，依次为左上、右上、右下、左下（以逆时针顺序为准）。
         Point2f vertices1[4], vertices2[4];
-        rect1.points(vertices1);
-        rect2.points(vertices2);
-
+        for(int i = 0; i < 4; i++){
+            vertices1[i] = leftLight.point[i];
+        }
+        for(int i = 0; i < 4; i++){
+            vertices2[i] = rightLight.point[i];
+        }
+ 
         // 合并所有顶点
         vector<Point2f> allPoints(vertices1, vertices1 + 4);
         allPoints.insert(allPoints.end(), vertices2, vertices2 + 4);

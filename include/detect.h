@@ -69,13 +69,16 @@ public:
     //根据平行角度匹配灯条
     vector<pair<RotatedRect, RotatedRect>> matchRotatedRects(const vector<RotatedRect>& rects,
     const float& threshold, const double& m_maxHeightDiff, const double& m_maxDistance);
+
+    vector<pair<LightDescriptor, LightDescriptor>> matchLight(const vector<LightDescriptor>& lights,
+    const float& threshold, const double& m_maxHeightDiff, const double& m_maxDistance);
     };
 
 //绘制并检测装甲板
 class Armor{
 public:
     //绘制装甲板
-    Mat Armors(const vector<pair<RotatedRect, RotatedRect>>& m_lights, Mat& m_frame);
+    Mat Armors(const vector<pair<LightDescriptor, LightDescriptor>>& m_lights, Mat& m_frame);
 };
 
 #endif

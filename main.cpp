@@ -29,7 +29,7 @@ void drawRotatedRect(Mat& image, const RotatedRect& rotatedRect, const Scalar& c
 
 int main(){
     //读取视频文件
-    VideoCapture cap("前哨站.avi");
+    VideoCapture cap("远景.avi");
     if(!cap.isOpened()){
         cout << "视频加载失败" << endl;
     }
@@ -55,7 +55,7 @@ int main(){
 
     vector<vector<Point>> all_contours;     //未经筛选的轮廓
     vector<LightDescriptor> lights;       //筛选过宽高比的矩形
-    vector<pair<RotatedRect, RotatedRect>> matching_lights;    //根据倾斜角等筛选出的配对灯条
+    vector<pair<LightDescriptor, LightDescriptor>> matching_lights;    //根据倾斜角等筛选出的配对灯条
 
 
     while(true){
@@ -71,13 +71,14 @@ int main(){
     // 使用高斯函数平滑图像，减少噪声
     blurred = frame_dispose.imageGaussion(frame);
 
-    // // 红蓝通道相减，强调蓝色区域
+    // // 红蓝通道相减，强调红色区域
     // red_minus_blue = frame_dispose.stressRed(blurred);
-    // // // 蓝红通道相减，强调红色区域
-    // // blue_minus_red = frame_dispose.stressBlue(blurred);
+
+    // 蓝红通道相减，强调蓝色区域
+    blue_minus_red = frame_dispose.stressBlue(frame);
 
     // 对彩色图像进行二值化处理
-    binaryImage = frame_dispose.imageThreshold(blurred, thresh);
+    binaryImage = frame_dispose.imageThreshold(blue_minus_red, thresh);
 
     // 对二值化图像进行膨胀
     dst = frame_dispose.imageDilate(binaryImage);    
@@ -89,28 +90,28 @@ int main(){
     findLightBar all_lightBar;
     lights = all_lightBar.Lights(all_contours, minRatio, maxRatio, minArea);
     
-    // 尝试绘制识别出的所有灯条
-    for(size_t i = 0; i < lights.size(); i++){
-        drawLight(frame, lights[i], Scalar(255, 255, 255), 2);
-    }
+    // // 尝试绘制识别出的所有灯条
+    // for(size_t i = 0; i < lights.size(); i++){
+    //     drawLight(frame, lights[i], Scalar(255, 255, 255), 2);
+    // }
 
     //匹配灯条
     matchingLightBar right_lightBar;
 
     //根据矩形的倾斜角度两两匹配灯条
-    lights = right_lightBar.matchRotatedRects(rightAspectRect, angle_threshold, maxHeightDiff, maxDistance);
+    matching_lights = right_lightBar.matchLight(lights, angle_threshold, maxHeightDiff, maxDistance);
 
-    // // // 遍历vector并输出每对RotatedRect
-    // // for (const auto& RotatedRect : lights){
-    // //     const auto& rect1 = RotatedRect.first;
-    // //     const auto& rect2 = RotatedRect.second;
-    // //     drawRotatedRect(frame, rect1, Scalar(255, 255, 255), 2);
-    // //     drawRotatedRect(frame, rect2, Scalar(255, 255, 255), 2);
-    // // }
+    // // 遍历vector并输出每对RotatedRect
+    // for (const auto& lights : matching_lights){
+    //     const auto& leftLight = lights.first;
+    //     const auto& rightLight = lights.second;
+    //     drawLight(frame, leftLight, Scalar(255, 255, 255), 2);
+    //     drawLight(frame, rightLight, Scalar(255, 255, 255), 2);
+    // }
 
-    // //识别装甲板
-    // Armor all_armors;
-    // frame = all_armors.Armors(lights, frame);
+    //识别装甲板
+    Armor all_armors;
+    frame = all_armors.Armors(matching_lights, frame);
 
     imshow("前哨站", frame);
 

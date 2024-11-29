@@ -39,13 +39,14 @@ Mat imageDispose:: stressRed(const Mat& m_frame){
     return m_red_minus_blue;
 }
 
-//对彩色图像进行二值化处理
+//对彩色/灰色图像进行二值化处理
 Mat imageDispose:: imageThreshold(const Mat& m_gary, const double& thresh){
-    Mat gary;
-    cvtColor(m_gary, gary, COLOR_BGR2GRAY);
+    if(!m_gary.channels() == 1){
+        cvtColor(m_gary, m_gary, COLOR_BGR2GRAY);
+    }
     Mat m_binaryImage;
     // 对灰度图进行阈值化处理
-    threshold(gary, m_binaryImage, thresh, 255, THRESH_BINARY);
+    threshold(m_gary, m_binaryImage, thresh, 255, THRESH_BINARY);
 
     return m_binaryImage;
 }
