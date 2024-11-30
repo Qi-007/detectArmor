@@ -40,10 +40,13 @@ Mat imageDispose:: stressRed(const Mat& m_frame){
 }
 
 //对彩色/灰色图像进行二值化处理
-Mat imageDispose:: imageThreshold(const Mat& m_gary, const double& thresh){
-    if(!m_gary.channels() == 1){
+Mat imageDispose:: imageThreshold(Mat& m_gary){
+    double thresh = 120.0;  //亮度阈值
+    if(m_gary.channels() != 1){
         cvtColor(m_gary, m_gary, COLOR_BGR2GRAY);
     }
+    // cout << m_gary.channels() << endl;
+    // cvtColor(m_gary, m_gary, COLOR_BGR2GRAY);
     Mat m_binaryImage;
     // 对灰度图进行阈值化处理
     threshold(m_gary, m_binaryImage, thresh, 255, THRESH_BINARY);

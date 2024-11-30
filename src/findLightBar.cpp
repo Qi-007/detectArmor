@@ -21,8 +21,10 @@
 // }
 
 //按轮廓的宽高比.面积大小筛选轮廓
-vector<LightDescriptor> findLightBar:: Lights(const vector<vector<Point>>& contours, const float& minRatio,
-const float& maxRatio, const float& minArea){
+vector<LightDescriptor> findLightBar:: Lights(const vector<vector<Point>>& contours){
+    float minArea = 200.0f;   //最小面积
+    double minRatio = 0.001;   //最小宽高比  
+    double maxRatio = 10.0;   //最大宽高比
     //存储筛选过的灯条
     vector<LightDescriptor> m_light;
 

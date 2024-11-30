@@ -5,6 +5,7 @@
 
 using namespace std;
 using namespace cv;
+
 //绘制最小外接矩形(灯条类)
 void drawLight(Mat& image, const LightDescriptor& light, const Scalar& color, int thickness) {
     // 将四个顶点连线绘制出旋转矩形
@@ -14,37 +15,12 @@ void drawLight(Mat& image, const LightDescriptor& light, const Scalar& color, in
     return;
 }
 
-//绘制最小外接矩形
-void drawRotatedRect(Mat& image, const RotatedRect& rotatedRect, const Scalar& color, int thickness) {
-    // 获取 RotatedRect 的四个顶点
-    Point2f vertices[4];
-    rotatedRect.points(vertices);
-
-    // 将四个顶点连线绘制出旋转矩形
-    for (int i = 0; i < 4; ++i) {
-        line(image, vertices[i], vertices[(i + 1) % 4], color, thickness);
-    }
-    return;
-}
-
 int main(){
     //读取视频文件
-    VideoCapture cap("远景.avi");
+    VideoCapture cap("近景.avi");
     if(!cap.isOpened()){
         cout << "视频加载失败" << endl;
     }
-    
-    //读取阈值
-    Information all_information;
-
-    double thresh = all_information.thresh;    //亮度阈值
-    float minArea = all_information.minArea;    //灯条的最小面积
-    double minRatio = all_information.minRatio;     //灯条的最小宽高比
-    double maxRatio = all_information.maxRatio;     //灯条的最大宽高比
-    // double light_armor_ratio = all_information.light_armor_ratio;   //灯条长与装甲板宽的比值
-    float angle_threshold = all_information.angle_threshold;    //筛选平行角度的阈值
-    double maxHeightDiff = all_information.maxHeightDiff;   //两灯条质心的最大高度差
-    double maxDistance = all_information.maxDistance;   //两灯条之间的最大距离
 
     Mat frame,  //原图像
         blurred,    //高斯函数去噪
@@ -56,7 +32,7 @@ int main(){
     vector<vector<Point>> all_contours;     //未经筛选的轮廓
     vector<LightDescriptor> lights;       //筛选过宽高比的矩形
     vector<pair<LightDescriptor, LightDescriptor>> matching_lights;    //根据倾斜角等筛选出的配对灯条
-
+    vector<pair<LightDescriptor, LightDescriptor>> foundArmor;      // 识别后的装甲板
 
     while(true){
     //读取每一帧
@@ -71,14 +47,14 @@ int main(){
     // 使用高斯函数平滑图像，减少噪声
     blurred = frame_dispose.imageGaussion(frame);
 
-    // // 红蓝通道相减，强调红色区域
-    // red_minus_blue = frame_dispose.stressRed(blurred);
+    // 红蓝通道相减，强调红色区域
+    red_minus_blue = frame_dispose.stressRed(blurred);
 
-    // 蓝红通道相减，强调蓝色区域
-    blue_minus_red = frame_dispose.stressBlue(frame);
+    // // 蓝红通道相减，强调蓝色区域
+    // blue_minus_red = frame_dispose.stressBlue(frame);
 
     // 对彩色图像进行二值化处理
-    binaryImage = frame_dispose.imageThreshold(blue_minus_red, thresh);
+    binaryImage = frame_dispose.imageThreshold(red_minus_blue);
 
     // 对二值化图像进行膨胀
     dst = frame_dispose.imageDilate(binaryImage);    
@@ -88,7 +64,7 @@ int main(){
 
     //识别灯条
     findLightBar all_lightBar;
-    lights = all_lightBar.Lights(all_contours, minRatio, maxRatio, minArea);
+    lights = all_lightBar.Lights(all_contours);
     
     // // 尝试绘制识别出的所有灯条
     // for(size_t i = 0; i < lights.size(); i++){
@@ -98,8 +74,8 @@ int main(){
     //匹配灯条
     matchingLightBar right_lightBar;
 
-    //根据矩形的倾斜角度两两匹配灯条
-    matching_lights = right_lightBar.matchLight(lights, angle_threshold, maxHeightDiff, maxDistance);
+    //两两匹配灯条
+    matching_lights = right_lightBar.matchLight(lights);
 
     // // 遍历vector并输出每对RotatedRect
     // for (const auto& lights : matching_lights){
@@ -109,12 +85,18 @@ int main(){
     //     drawLight(frame, rightLight, Scalar(255, 255, 255), 2);
     // }
 
-    //识别装甲板
-    Armor all_armors;
-    frame = all_armors.Armors(matching_lights, frame);
+    // 识别装甲板
+    findArmor armors;
+    foundArmor = armors.find_Armor(matching_lights);
+
+    // 匹配装甲板
+    matchingArmor all_armors;
+    frame = all_armors.matchingArmors(foundArmor, frame);
 
     imshow("前哨站", frame);
 
+    foundArmor.clear();     // 清空上一帧的装甲板
+    matching_lights.clear();    // 清空上一帧的配对灯条
     lights.clear();    // 清空上一帧筛选的矩形
     all_contours.clear();       // 清空上一帧的轮廓
 
