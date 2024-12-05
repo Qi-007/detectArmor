@@ -17,7 +17,7 @@ void drawLight(Mat& image, const LightDescriptor& light, const Scalar& color, in
 
 int main(){
     //读取视频文件
-    VideoCapture cap("近景.avi");
+    VideoCapture cap("3.mp4");
     if(!cap.isOpened()){
         cout << "视频加载失败" << endl;
     }
@@ -34,6 +34,9 @@ int main(){
     vector<pair<LightDescriptor, LightDescriptor>> matching_lights;    //根据倾斜角等筛选出的配对灯条
     vector<pair<LightDescriptor, LightDescriptor>> foundArmor;      // 识别后的装甲板
 
+    //  单独对ROI区域进行操作
+    Rect roi(720, 370, 470, 230);
+
     while(true){
     //读取每一帧
     cap >> frame;
@@ -41,20 +44,22 @@ int main(){
         break;
     }
 
+    Mat roiFrame = frame(roi);
+
     // 图像的预处理
     imageDispose frame_dispose;
 
     // 使用高斯函数平滑图像，减少噪声
     blurred = frame_dispose.imageGaussion(frame);
 
-    // 红蓝通道相减，强调红色区域
-    red_minus_blue = frame_dispose.stressRed(blurred);
+    // // 红蓝通道相减，强调红色区域
+    // red_minus_blue = frame_dispose.stressRed(blurred);
 
-    // // 蓝红通道相减，强调蓝色区域
-    // blue_minus_red = frame_dispose.stressBlue(frame);
+    // 蓝红通道相减，强调蓝色区域
+    blue_minus_red = frame_dispose.stressBlue(blurred);
 
     // 对彩色图像进行二值化处理
-    binaryImage = frame_dispose.imageThreshold(red_minus_blue);
+    binaryImage = frame_dispose.imageThreshold(blue_minus_red);
 
     // 对二值化图像进行膨胀
     dst = frame_dispose.imageDilate(binaryImage);    
@@ -65,43 +70,70 @@ int main(){
     //识别灯条
     findLightBar all_lightBar;
     lights = all_lightBar.Lights(all_contours);
-    
-    // // 尝试绘制识别出的所有灯条
+
+    //    // 尝试绘制识别出的所有灯条
     // for(size_t i = 0; i < lights.size(); i++){
     //     drawLight(frame, lights[i], Scalar(255, 255, 255), 2);
+    //     // // 打印每个轮廓的宽高比
+    //     // cout << lights[i].width / lights[i].length << endl;
     // }
+    
+    // 尝试绘制识别出的所有位于ROI区域的灯条
+    rectangle(frame, roi, Scalar(0, 255, 0), 2);
+    for(size_t i = 0; i < lights.size(); i++){
+        // 检查是否有顶点在ROI内
+        bool section = false;
+        for(int j = 0; j < 4; j++){
+            if(roi.contains(lights[i].point[j])){
+                section = true;
+                break;
+            }
+        }
+        if(section){
+            // 两者有交集
+            drawLight(frame, lights[i], Scalar(255, 255, 255), 2);
+            // // 打印每个轮廓的宽高比
+            // cout << lights[i].width / lights[i].length << endl;
+        }else{
+            continue;
+        }
 
-    //匹配灯条
-    matchingLightBar right_lightBar;
+    }
+    imshow("frame", frame);
 
-    //两两匹配灯条
-    matching_lights = right_lightBar.matchLight(lights);
+    // //匹配灯条
+    // matchingLightBar right_lightBar;
 
-    // // 遍历vector并输出每对RotatedRect
-    // for (const auto& lights : matching_lights){
-    //     const auto& leftLight = lights.first;
-    //     const auto& rightLight = lights.second;
-    //     drawLight(frame, leftLight, Scalar(255, 255, 255), 2);
-    //     drawLight(frame, rightLight, Scalar(255, 255, 255), 2);
-    // }
+    // //两两匹配灯条
+    // matching_lights = right_lightBar.matchLight(lights);
 
-    // 识别装甲板
-    findArmor armors;
-    foundArmor = armors.find_Armor(matching_lights);
+    // // // 遍历vector并输出每对RotatedRect
+    // // for (const auto& lights : matching_lights){
+    // //     const auto& leftLight = lights.first;
+    // //     const auto& rightLight = lights.second;
+    // //     drawLight(frame, leftLight, Scalar(255, 255, 255), 2);
+    // //     drawLight(frame, rightLight, Scalar(255, 255, 255), 2);
+    // // }
 
-    // 匹配装甲板
-    matchingArmor all_armors;
-    frame = all_armors.matchingArmors(foundArmor, frame);
+    // // 识别装甲板
+    // findArmor armors;
+    // foundArmor = armors.find_Armor(matching_lights);
 
-    imshow("前哨站", frame);
+    // // 匹配装甲板
+    // matchingArmor all_armors;
+    // frame = all_armors.matchingArmors(foundArmor, frame);
+
+    // imshow("前哨站", frame);
 
     foundArmor.clear();     // 清空上一帧的装甲板
     matching_lights.clear();    // 清空上一帧的配对灯条
     lights.clear();    // 清空上一帧筛选的矩形
     all_contours.clear();       // 清空上一帧的轮廓
 
-    waitKey(1000/cap.get(CAP_PROP_FPS));
-
+    char c = waitKey(0);
+    if(c == 'q' || c == 27){
+        break;
+    }
     }
     cap.release();
     destroyAllWindows();

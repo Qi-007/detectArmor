@@ -23,8 +23,9 @@
 //按轮廓的宽高比.面积大小筛选轮廓
 vector<LightDescriptor> findLightBar:: Lights(const vector<vector<Point>>& contours){
     float minArea = 200.0f;   //最小面积
-    double minRatio = 0.001;   //最小宽高比  
-    double maxRatio = 10.0;   //最大宽高比
+    float maxArea = 5000.0f;   // 最大面积
+    double minRatio = 0.10;   //最小宽高比  
+    double maxRatio = 0.20;   //最大宽高比
     //存储筛选过的灯条
     vector<LightDescriptor> m_light;
 
@@ -34,9 +35,9 @@ vector<LightDescriptor> findLightBar:: Lights(const vector<vector<Point>>& conto
         if (contours[i].size() < 5) continue; // 拟合椭圆需要至少5个点
         // 获取椭圆的外接矩形
         RotatedRect Light_Rec = fitEllipse(contours[i]);
-          //计算长宽比
-        float aspectRatio = static_cast<float> (Light_Rec.size.width) / (Light_Rec.size.height);
-        if(aspectRatio > minRatio && aspectRatio < maxRatio && Light_Rec.size.area() > minArea){
+          //计算宽高比
+        float aspectRatio = static_cast<float> (Light_Rec.size.width) / (Light_Rec.size.height); 
+        if(aspectRatio > minRatio && aspectRatio < maxRatio && Light_Rec.size.area() > minArea && Light_Rec.size.area() < maxArea){
             m_light.push_back(Light_Rec);
         }
    }

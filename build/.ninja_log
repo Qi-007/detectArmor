@@ -1,8 +1,9 @@
 # ninja log v5
-1	1299	1732928632718238377	CMakeFiles/test.dir/src/imageDispose.cpp.o	9029cc00706442e7
-1	25	1732958133547423460	build.ninja	eedf2c9db7db3446
-2	1460	1732928632879249284	CMakeFiles/test.dir/src/matchingArmor.cpp.o	37e25fda07c7a24d
-2	1283	1732928632702237293	CMakeFiles/test.dir/src/matchingLightBar.cpp.o	7f24b749e58b0d72
-1	1316	1732928632736239596	CMakeFiles/test.dir/src/findLightBar.cpp.o	11d3b3e62096acf
-1460	1609	1732928633026259239	test	34923f51a4a7b518
-2	1398	1732928632818245151	CMakeFiles/test.dir/main.cpp.o	6648e9c31693176d
+1	1341	1733362255641186582	CMakeFiles/test.dir/src/imageDispose.cpp.o	9029cc00706442e7
+1	25	1733370122966495582	build.ninja	eedf2c9db7db3446
+2	1337	1733362255637186734	CMakeFiles/test.dir/src/matchingArmor.cpp.o	37e25fda07c7a24d
+2	1326	1733362255625187189	CMakeFiles/test.dir/src/matchingLightBar.cpp.o	7f24b749e58b0d72
+1	1305	1733362255604187986	CMakeFiles/test.dir/src/findLightBar.cpp.o	11d3b3e62096acf
+1199	1362	1733369487834114460	test	420a67b3034ed1df
+1	1199	1733369487673113902	CMakeFiles/test.dir/main.cpp.o	6648e9c31693176d
+1	1396	1733362255696184495	CMakeFiles/test.dir/src/findArmor.cpp.o	2a3635326944702e

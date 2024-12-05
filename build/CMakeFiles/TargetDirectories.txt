@@ -1,0 +1,3 @@
+/home/zjq/code/detectArmor/build/CMakeFiles/test.dir
+/home/zjq/code/detectArmor/build/CMakeFiles/edit_cache.dir
+/home/zjq/code/detectArmor/build/CMakeFiles/rebuild_cache.dir

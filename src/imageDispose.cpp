@@ -13,9 +13,13 @@ Mat imageDispose:: stressBlue(const Mat& m_frame){
     vector<Mat> channels(3);
     split(m_frame, channels);   //分理出B,G,R通道
 
+    // 拉高蓝色通道
+    Mat blueChannel = channels[0];
+    blueChannel += 50; // 增加蓝色通道值
+
     //蓝色通道减去红色通道
     Mat m_blue_minus_red;
-    subtract(channels[0], channels[2], m_blue_minus_red);     //B-R
+    subtract(blueChannel, channels[2], m_blue_minus_red);     //B-R
 
     //归一化到可视范围
     normalize(m_blue_minus_red, m_blue_minus_red, 0, 255, NORM_MINMAX);
@@ -29,9 +33,13 @@ Mat imageDispose:: stressRed(const Mat& m_frame){
     vector<Mat> channels(3);
     split(m_frame, channels);   //分理出B,G,R通道
 
+    // 拉高红色通道
+    Mat redChannel = channels[2];
+    redChannel += 50;   // 增加红色通道值
+
     //红色通道减去蓝色通道
     Mat m_red_minus_blue;
-    subtract(channels[2], channels[0], m_red_minus_blue);     //R-B
+    subtract(redChannel, channels[0], m_red_minus_blue);     //R-B
 
     //归一化到可视范围
     normalize(m_red_minus_blue, m_red_minus_blue, 0, 255, NORM_MINMAX);
