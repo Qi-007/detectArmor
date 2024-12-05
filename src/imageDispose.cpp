@@ -15,7 +15,7 @@ Mat imageDispose:: stressBlue(const Mat& m_frame){
 
     // 拉高蓝色通道
     Mat blueChannel = channels[0];
-    blueChannel += 50; // 增加蓝色通道值
+    blueChannel += 45; // 增加蓝色通道值
 
     //蓝色通道减去红色通道
     Mat m_blue_minus_red;
