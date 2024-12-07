@@ -6,10 +6,10 @@ bool isVerticalLike(float angle) {
 
 //按轮廓的宽高比.面积大小筛选轮廓
 vector<LightDescriptor> findLightBar:: Lights(const vector<vector<Point>>& contours){
-    float minArea = 200.0f;   //最小面积
+    float minArea = 100.0f;   //最小面积
     float maxArea = 3000.0f;   // 最大面积
     double minRatio = 1.2;   //最小宽高比  
-    double maxRatio = 3.5;   //最大宽高比
+    double maxRatio = 8.0;   //最大宽高比
     //存储筛选过的灯条
     vector<LightDescriptor> m_light;
 
@@ -32,6 +32,7 @@ vector<LightDescriptor> findLightBar:: Lights(const vector<vector<Point>>& conto
                 // cout << "height:" << Light_Rec.size.height << "   width :" << Light_Rec.size.width << endl;
                 // cout << Light_Rec.angle << endl;
                 // cout << "area:  " << Light_Rec.size.area() << endl;
+                // cout << "ratio:" << aspectRatio << endl;
             m_light.push_back(Light_Rec);
         }
    }

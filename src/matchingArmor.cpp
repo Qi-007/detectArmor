@@ -28,6 +28,8 @@ Mat matchingArmor:: matchingArmors(const vector<pair<LightDescriptor, LightDescr
         return m_frame;
     }
 
+    double min_armorArea = 500.0;
+
     //绘制装甲板区域
     for(const auto& m_light : m_lights){
         const auto& leftLight = m_light.first;
@@ -56,6 +58,15 @@ Mat matchingArmor:: matchingArmors(const vector<pair<LightDescriptor, LightDescr
         // 使用cv::convexHull计算凸包
         vector<Point> hull;
         convexHull(intPoints, hull);
+
+        // 计算凸包面积（面积太小的装甲板不要）
+        double armorArea = contourArea(hull);
+
+        if(armorArea < min_armorArea){
+            continue;
+        } 
+
+        // cout << armorArea << endl;
 
         // 绘制凸包
         for (size_t i = 0; i < hull.size(); i++) {

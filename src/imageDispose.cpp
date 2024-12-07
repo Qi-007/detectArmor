@@ -48,23 +48,23 @@ Mat imageDispose:: stressRed(const Mat& m_frame){
 }
 
 //对彩色/灰色图像进行二值化处理
-Mat imageDispose:: imageThreshold(Mat& m_gary){
-    double thresh = 120.0;  //亮度阈值
-    if(m_gary.channels() != 1){
-        cvtColor(m_gary, m_gary, COLOR_BGR2GRAY);
+Mat imageDispose:: imageThreshold(const Mat& frame, const double& thresh){
+    Mat m_frame = frame.clone();
+    if(m_frame.channels() != 1){
+        cvtColor(m_frame, m_frame, COLOR_BGR2GRAY);
     }
     // cout << m_gary.channels() << endl;
     // cvtColor(m_gary, m_gary, COLOR_BGR2GRAY);
     Mat m_binaryImage;
     // 对灰度图进行阈值化处理
-    threshold(m_gary, m_binaryImage, thresh, 255, THRESH_BINARY);
+    threshold(m_frame, m_binaryImage, thresh, 255, THRESH_BINARY);
 
     return m_binaryImage;
 }
 
 //对二值化图像进行膨胀处理
 Mat imageDispose:: imageDilate(const Mat& m_binaryImage){
-    // 创建结构元素（7*7矩形核）
+    // 创建结构元素
     Mat m_kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
 
     // 存储膨胀结果
@@ -72,4 +72,26 @@ Mat imageDispose:: imageDilate(const Mat& m_binaryImage){
     dilate(m_binaryImage, m_dst, m_kernel);
 
     return m_dst;
+}
+
+// 对二值化图像进行闭运算处理
+Mat imageDispose:: imageClose(const Mat& binary){
+    // 创建结构元素
+    Mat m_kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
+
+    Mat close;
+    morphologyEx(binary, close, MORPH_CLOSE, m_kernel);
+
+    return close;
+}
+
+// 对二值化图像进行开运算处理
+Mat imageDispose:: imageOpen(const Mat& binary){
+    // 创建结构元素
+    Mat m_kernel = getStructuringElement(MORPH_RECT, Size(3, 3));
+
+    Mat open;
+    morphologyEx(binary, open, MORPH_OPEN, m_kernel);
+
+    return open;
 }

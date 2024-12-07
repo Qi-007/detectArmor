@@ -9,6 +9,11 @@
 using namespace std;
 using namespace cv;
 
+//计算两点之间的欧几里得距离
+inline float calculateDistance(const Point2f& p1, const Point2f& p2){
+    return sqrt(pow(p2.x - p1.x, 2) + pow(p2.y - p1.y, 2));
+}
+
 // 创建灯条类
 class LightDescriptor{
 public:
@@ -32,8 +37,10 @@ public:
     Mat imageGaussion(const Mat& m_frame);   //使用高斯函数平滑图像，减少噪声
     Mat stressBlue(const Mat& m_frame);   //筛选出蓝色
     Mat stressRed(const Mat& m_frame);    //筛选出红色
-    Mat imageThreshold(Mat& m_frame);    //对彩色/灰色图像进行二值化处理
+    Mat imageThreshold(const Mat& m_frame, const double& thresh);    //对彩色/灰色图像进行二值化处理
     Mat imageDilate(const Mat& m_binaryImage);    //对二值化图像进行膨胀
+    Mat imageClose(const Mat& binary);       // 对二值化图像进行闭运算处理
+    Mat imageOpen(const Mat& binary);       // 对二值化图像进行开运算处理
 };
 
 //检测灯条
